@@ -3,7 +3,7 @@ const db = require('../database')
 const Product = function (product) {
   this.category_id = product.category_id;
   this.category_name = product.category_name;
-  
+
   this.product_id = product.product_id;
   this.product_name = product.product_name;
   this.description = product.description;
@@ -22,7 +22,7 @@ Product.select = async (data, result) => {
 
 Product.addCategory = async (data, result) => {
   console.log(data);
-  let sql ="insert into category(category_name) VALUES(?)";
+  let sql = "insert into category(category_name) VALUES(?)";
   await db.run(sql, data.category_name, (err, res) => {
     console.log(sql);
     if (err) {
@@ -37,7 +37,7 @@ Product.addCategory = async (data, result) => {
 
 Product.addProduct = async (data, result) => {
   console.log(data);
-  await db.run("insert into product(product_name,category_id,description,price) VALUES(?,?,?,?)", data.product_name,data.category_id,data.description,data.price, (err, res) => {
+  await db.run("insert into product(product_name,category_id,description,price) VALUES(?,?,?,?)", data.product_name, data.category_id, data.description, data.price, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(err, null, { status: false });
@@ -81,7 +81,7 @@ Product.updateProduct = async (data, result) => {
 
 Product.deleteCategory = async (data, result) => {
   let sql = `delete from category where category.category_id = (?)`;
-  await db.run(sql,[data.category_id], (err, res) => {
+  await db.run(sql, [data.category_id], (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(err, null, { status: false });
@@ -93,7 +93,7 @@ Product.deleteCategory = async (data, result) => {
 };
 Product.deleteProduct = async (data, result) => {
   let sql = `delete from product where product.product_id = (?)`;
-  await db.run(sql,[data.product_id], (err, res) => {
+  await db.run(sql, [data.product_id], (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(err, null, { status: false });
@@ -103,9 +103,6 @@ Product.deleteProduct = async (data, result) => {
     }
   });
 };
-
-
-
 
 
 
